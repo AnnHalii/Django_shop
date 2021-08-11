@@ -2,6 +2,7 @@ version: '3.7'
 services:
   web:
     build: .
+    image: "${IMAGE}"
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/shop
@@ -21,6 +22,8 @@ services:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "admin"
       POSTGRES_DB: "shop_db"
+      LC_ALL: "en_US.UTF-8"
+      LC_CTYPE: "en_US.UTF-8"
 volumes:
     postgres_data:
 
