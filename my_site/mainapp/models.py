@@ -5,7 +5,7 @@ from django.conf import settings
 class LatestProductsManager(models.Manager):
 
     def get_queryset(self):
-        return super().get_queryset().order_by('-id')[:5:-1]
+        return super().get_queryset().order_by('-id')[:5]
 
 
 class Category(models.Model):
@@ -31,6 +31,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    # class Meta:
+    #     verbose_name='Продукты'
+    #     verbose_name_plural='Продукты'
+    #     ordering=['title', 'id']
 
 
 class CartProduct(models.Model):

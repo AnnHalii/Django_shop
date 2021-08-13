@@ -49,32 +49,29 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <nav aria-label="breadcrumb" class="mx-5">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'base' %}">Главная</a></li>
-    <li class="breadcrumb-item"><a href="#">{{ product.category.name }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
-  </ol>
-</nav>
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.image.url }}" alt="..." /></div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Главная</a></li>
+                            <li class="breadcrumb-item"><a href="#"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page"></li>
+                        </ol>
+                    </nav>
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src=" "
+                                               alt="..."/></div>
                     <div class="col-md-6">
                         <div class="small mb-1">SKU: BST-498</div>
-                        <h1 class="display-5 fw-bolder">{{ product.title }}</h1>
+                        <h1 class="display-5 fw-bolder"></h1>
                         <div class="fs-5 mb-5">
-                            <span>₴{{ product.price }}</span>
+                            <span>₴3330</span>
                         </div>
                         <p class="lead">{{ product.description }}</p>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
+                                   style="max-width: 3rem"/>
                             <button class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </button>
                         </div>
-                        {% if product.category.slug == 'notebooks' %}
-                            {% include 'notebook_specification.html' %}
-                        {% else %}
-                            {% include 'smartphone_specification.html' %}
-                        {% endif %}
 
                     </div>
                 </div>
