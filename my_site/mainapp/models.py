@@ -13,6 +13,11 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', kwargs={'cat_id': self.pk})
 
+    class Meta:
+        verbose_name = 'Категории'
+        verbose_name_plural = 'Категории'
+        ordering = ['id', 'name']
+
 
 class Product(models.Model):
 
@@ -32,10 +37,10 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product', kwargs={'slug_id': self.slug})
 
-    # class Meta:
-    #     verbose_name='Продукты'
-    #     verbose_name_plural='Продукты'
-    #     ordering=['title', 'id']
+    class Meta:
+        verbose_name = 'Продукты'
+        verbose_name_plural = 'Продукты'
+        ordering = ['id', 'title']
 
 
 class CartProduct(models.Model):
@@ -46,6 +51,10 @@ class CartProduct(models.Model):
 
     def __str__(self):
         return f'Продукт {self.chosen_product.title} (для корзины)'
+
+    class Meta:
+        verbose_name = 'Корзина товара'
+        verbose_name_plural = 'Корзины товаров'
 
 
 class Order(models.Model):
@@ -62,6 +71,10 @@ class Order(models.Model):
     final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Общая цена')
     order_status = models.CharField(max_length=15, choices=ORDER_STATUSES, default=DEFAULT)
 
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
 
 class Cart(models.Model):
 
@@ -69,3 +82,7 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'

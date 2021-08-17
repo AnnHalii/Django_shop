@@ -16,3 +16,4 @@ def show_product(request, slug_id):
 
 # def show_category(request, cat_id):
 #     return HttpResponse(f"Отображение продукта с номером: {cat_id}")
+
