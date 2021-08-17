@@ -204,3 +204,18 @@ a:hover {
 
 
 /* Footer */
+
+
+/*Breadcrumb*/
+
+.breadcrumb li{
+
+    margin-right: 5px;
+    font-size: 19px;
+}
+.col-md-6 img{
+
+    max-width: 500px;
+}
+
+/*Breadcrumb*/

@@ -1,11 +1,6 @@
 from django.db import models
 from django.conf import settings
-
-
-class LatestProductsManager(models.Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().order_by('-id')[:5]
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -15,10 +10,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'cat_id': self.pk})
+
 
 class Product(models.Model):
 
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.DO_NOTHING)
+    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.DO_NOTHING)#добавить on_delete=models.PROTECT
     title = models.CharField(max_length=255, verbose_name='Наименование')
     slug = models.SlugField(unique=True)
     image = models.ImageField(verbose_name='Изображение')
@@ -27,10 +25,12 @@ class Product(models.Model):
     manufacturer = models.CharField(max_length=255, verbose_name='Производитель')
     amount = models.PositiveIntegerField(default=0, verbose_name='Количество')
     characteristics = models.JSONField(verbose_name='Характеристики')
-    # latest_products = LatestProductsManager()
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('product', kwargs={'slug_id': self.slug})
 
     # class Meta:
     #     verbose_name='Продукты'
