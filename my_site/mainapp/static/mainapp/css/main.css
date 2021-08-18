@@ -213,9 +213,25 @@ a:hover {
     margin-right: 5px;
     font-size: 19px;
 }
+
+/*Breadcrumb*/
+
+
+/*Product Detail*/
+
 .col-md-6 img{
 
     max-width: 500px;
+
 }
 
-/*Breadcrumb*/
+/*Product Detail*/
+
+/*Pagination*/
+
+.page-link {
+
+    color: #343434
+}
+
+/*Pagination*/

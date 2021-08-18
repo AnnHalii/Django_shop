@@ -5,6 +5,7 @@ from .models import *
 
 
 class ProductListView(ListView):
+    paginate_by = 6
     model = Product
     template_name = 'base.html'
     context_object_name = 'products'
