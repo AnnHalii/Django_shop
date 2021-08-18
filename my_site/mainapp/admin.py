@@ -6,6 +6,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'image', 'price', 'amount')
     list_display_links = ('title', 'image', 'amount')
     search_fields = ('title', 'description')
+    list_filter = ('title', 'price')
 
 
 class CategoryAdmin(admin.ModelAdmin):

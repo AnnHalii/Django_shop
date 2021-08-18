@@ -10,8 +10,11 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
 
-def show_product(request, slug_id):
-    return HttpResponse(f"Отображение продукта со слагом: {slug_id}")
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail.html'
+    slug_url_kwarg = 'product_slug'
+    context_object_name = 'product_detail'
 
 
 # def show_category(request, cat_id):
