@@ -234,4 +234,10 @@ a:hover {
     color: #343434
 }
 
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #666;
+    border-color: #666;
+}
 /*Pagination*/
