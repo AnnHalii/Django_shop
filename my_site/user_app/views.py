@@ -1,4 +1,10 @@
-from django.shortcuts import render
-from .models import CustomUser
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
-# Create your views here.
+from .forms import RegisterCustomUserForm
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterCustomUserForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('home')

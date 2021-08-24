@@ -38,7 +38,7 @@ class Product(models.Model):
         return reverse('product', kwargs={'product_slug': self.slug})
 
     class Meta:
-        verbose_name = 'Продукты'
+        verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         ordering = ['id', 'title']
 
