@@ -56,10 +56,16 @@ class CartProduct(models.Model):
         verbose_name = 'Корзина товара'
         verbose_name_plural = 'Корзины товаров'
 
+    @classmethod
+    def create_cart_product(cls, order, **kwargs):
+        product = Product.objects.get(slug=kwargs["product_slug"])
+        return cls.objects.create(order=order, chosen_product=product, qty=int(kwargs["amount"]))
+
 
 class Order(models.Model):
-    DEFAULT = 'new'
+    DEFAULT = 'draft'
     ORDER_STATUSES = [
+        ('draft', 'Черновик'),
         ('new', 'Новый'),
         ('confirmed', 'Подтверждён'),
         ('rejected', 'Отклонён'),
@@ -68,12 +74,23 @@ class Order(models.Model):
     ]
     cart = models.ForeignKey('Cart', verbose_name='Корзина', on_delete=models.CASCADE, related_name='order')
     total_products = models.PositiveIntegerField(default=0)
-    final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Общая цена')
+    final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Общая цена', default=0)
     order_status = models.CharField(max_length=15, choices=ORDER_STATUSES, default=DEFAULT)
 
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+    @classmethod
+    def get_order(cls, cart):
+        order, _ = cls.objects.get_or_create(cart=cart, order_status=cls.DEFAULT)
+        return order
+
+    def add_product(self, **kwargs):
+        cart_product = CartProduct.create_cart_product(self, **kwargs)
+        self.total_products += cart_product.qty
+        self.final_price += cart_product.chosen_product.price * cart_product.qty
+        self.save()
 
 
 class Cart(models.Model):
@@ -86,3 +103,8 @@ class Cart(models.Model):
     class Meta:
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'
+
+    @classmethod
+    def get_object(cls, owner):
+        cart, _ = cls.objects.get_or_create(owner=owner)
+        return cart
