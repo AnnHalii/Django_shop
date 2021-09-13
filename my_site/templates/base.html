@@ -47,10 +47,11 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modal-cart">
+                    <a class="nav-link" href="{% url 'cart' %}" data-bs-toggle="modal" data-bs-target="#modal-cart">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
                     <!-- Modal -->
+                    {% for cp in cart_products %}
                     <div class="modal fade" id="modal-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -64,10 +65,10 @@
                                     <table class="table">
                                         <tbody>
                                         <tr>
-                                            <td><img src="{% static 'images/watch.jpg' %}" alt=""></td>
-                                            <td><a href="#">Apple Watch</a></td>
-                                            <td>₴13500.00</td>
-                                            <td>1</td>
+                                            <td><img src="{{ cp.chosen_product.image.url }}" alt=""></td>
+                                            <td><a href="#">{{cp.chosen_product.title }}</a></td>
+                                            <td>{{ cp.chosen_product.price }}</td>
+                                            <td>{{ cp.qty }}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -81,6 +82,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="fas fa-search"></i></a>

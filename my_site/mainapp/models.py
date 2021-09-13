@@ -93,6 +93,9 @@ class Order(models.Model):
         self.save()
 
 
+    # def remove_product(self, **kwargs):
+
+
 class Cart(models.Model):
 
     owner = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name='Владелец', on_delete=models.CASCADE, primary_key=True)
