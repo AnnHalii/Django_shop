@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <section class="main-content">
+        <div class="container">
+            <div class="row">
+            {% for post in posts %}
+
+                <div class="col-lg-4 .col-sm-6 mb-3">
+                    <div class="product-card">
+                        <div class="product-thumb">
+                            <a href="#"><img src="{{ p.image.url }}" alt=""></a>
+                        </div>
+                        <div class="product-details">
+                            <h4><a href="{{ p.get_absolute_url }}">{{ post.title }}</a></h4>
+                            <p>{{ post.description }}
+                            </p>
+                            <div class="product-bottom-details d-flex justify-content-between">
+                                <a href="#" style="color: #c8a482; font-size: 12px; letter-spacing: 1.5px; font-weight: 500; text-transform: uppercase;"><h6>Read More</h6></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock content%}

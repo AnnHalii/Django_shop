@@ -12,6 +12,8 @@ services:
       - ./.env.dev
     depends_on:
       - db
+      - mongodb
+      - redis
   db:
     image: postgres:latest
     ports:
@@ -24,6 +26,35 @@ services:
       POSTGRES_DB: "shop_db"
       LC_ALL: "en_US.UTF-8"
       LC_CTYPE: "en_US.UTF-8"
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data_container:/data/db
+  redis:
+    image: redis:latest
+    restart: always
+
+  celery:
+    restart: always
+    image: "${IMAGE}"
+    build: .
+    command: celery -A my_site worker -l info
+    volumes:
+      - .:/shop
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - redis
+      - db
+
 volumes:
     postgres_data:
+    mongodb_data_container:
 

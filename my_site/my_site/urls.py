@@ -24,6 +24,8 @@ urlpatterns = [
     path('', include('mainapp.urls')),
     path('', include('user_app.urls')),
     path('', include('api_app.urls')),
+    path('', include('some_app.urls')),
+    path('csv/', include('csv_app.urls')),
 
 ]
 

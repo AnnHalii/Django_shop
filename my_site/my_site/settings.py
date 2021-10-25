@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'mainapp.apps.MainappConfig',
     'user_app.apps.UserAppConfig',
     'api_app.apps.ApiAppConfig',
+    'some_app.apps.SomeAppConfig',
+    'csv_app.apps.CsvAppConfig',
 
 ]
 
@@ -97,6 +99,16 @@ DATABASES = {
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
 
+    },
+    'test': {
+        'ENGINE': 'djongo',
+        'NAME': 'test_mongo',
+        'CLIENT': {
+            'host': 'mongodb',
+            'port': 27017,
+            'username': 'admin',
+            'password': 'admin',
+        },
     }
 }
 
@@ -151,3 +163,5 @@ if DEBUG:
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DATABASE_ROUTERS = ['routers.db_routers.DefaultRouter', 'routers.db_routers.AuthRouters',]
+CELERY_BROKER_URL = 'redis://redis:6379'
