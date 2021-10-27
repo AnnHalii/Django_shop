@@ -1,5 +1,6 @@
 from djongo import models
 
+
 class SomeModel(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
